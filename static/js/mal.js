@@ -1,6 +1,9 @@
 // importing questions
 import { questions } from "./mal-questions.js";
+// importing wiz emotes
 import { wizQuestion, wizHappy, wizSad, wizInfo } from "./mal-wizard.js";
+// importing spells
+// import { spellCast } from "./mal-spells.js";
 
 // declaring DOM elements
 const startButton = document.getElementById("start-button");
@@ -12,6 +15,7 @@ const scoreDisplay = document.getElementById("score-display");
 const highScoreDisplay = document.getElementById("high-score-display");
 const wizardPrompt = document.getElementById("wizard-prompt");
 const healthBarContainer = document.getElementById("health-bar-container");
+const manaBarContainer = document.getElementById("mana-bar-container");
 const categoryTitleContainer = document.getElementById("categorie-title");
 const lvlTitleContainer = document.getElementById("level-title");
 
@@ -64,9 +68,10 @@ let isGameActive = false;
 let highScore = localStorage.getItem("highScore") || 0; // Load high score from local storage
 highScoreDisplay.textContent = highScore;
 let health = 100;
+let mana = 100;
 let actualLvl = 1; // setting the starting level, we'll add +1 for each level later
 
-// Function to update the health bar
+// function to update the health bar
 function updateHealthBar(penaltyPoints) {
   health -= penaltyPoints;
   if (health <= 0) {
@@ -83,6 +88,21 @@ function updateHealthBar(penaltyPoints) {
   }
 }
 
+// function to update the mana bar
+function updateManaBar(spellPoints) {
+  mana -= spellPoints;
+  if (mana <= 0) {
+    mana = 0;
+    manaBarContainer.innerHTML = "";
+    manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
+    // setting currentQuestionIndex to 999 to end the game
+    // as endgame() with currentQuestionIndex < questions.length will trigger a new question
+    // second thought: probably better to set currentQuestionIndex to questions.length, in case we got over 1000 questions :)))
+  } else {
+    manaBarContainer.innerHTML = "";
+    manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
+  }
+}
 // function to update the level title container > actual level to display
 //* FURTHER IMPLMENTATION IDEA : adding some cool effects in case we level up!
 function lvlUpdater() {
@@ -96,10 +116,38 @@ function lvlUpdater() {
     lvlTitleContainer.textContent = `Young Gun Wiz (${actualLvl + 2})`;
   }
   if (score > 85) {
-    lvlTitleContainer.textContent = `Ninja (${actualLvl + 3})`;
+    lvlTitleContainer.textContent = `Code Ninja (${actualLvl + 3})`;
   }
 }
-
+function spellCast(spell) {
+  if (health >= 100) {
+  } else {
+    switch (spell) {
+      case 1:
+        document.querySelector(".spell-one").style = "display: none";
+        break;
+      case 2:
+        document.querySelector(".spell-two").style = "display: none";
+        break;
+      case 3:
+        updateHealthBar(-40);
+        updateManaBar(30);
+        document.querySelector(".spell-three").style = "display: none";
+        break;
+      default:
+      // do nothing
+    }
+  }
+}
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("spell-one")) {
+    spellCast(1);
+  } else if (event.target.classList.contains("spell-two")) {
+    spellCast(2);
+  } else if (event.target.classList.contains("spell-three")) {
+    spellCast(3);
+  }
+});
 // ** Further logic for mana bar
 // * will be implemented later
 // Function to update the mana bar
@@ -137,6 +185,9 @@ function startGame() {
   showQuestion();
   healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
   healthBarContainer.style.display = "block";
+  document.getElementById("spell-board").style.display = `block`;
+  manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
+  manaBarContainer.style.display = "block";
 }
 
 function showQuestion() {
@@ -231,11 +282,13 @@ function endGame() {
   startButton.style.display = "block";
   wizardPrompt.textContent = "Thanks for playing!";
 
-  // Reset health bar
+  // Reset health & mana bar
   healthBarContainer.style.display = "none";
   health = 100;
   healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
-
+  manaBarContainer.style.display = "none";
+  mana = 100;
+  manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
   // block automatically starting of new game
   // edited: realisied via updateHealthBar() function
 

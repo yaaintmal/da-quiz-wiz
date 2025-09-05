@@ -48,9 +48,30 @@
                 <!-- used for joker logic -->
                 <!-- <div id="joker-tile">
                   <ul>
-                    <li>Joker 1</li>
-                    <li>Joker 2</li>
-                    <li>Joker 3</li>
+                    <li>
+                      <img
+                        src="./static/img/spells/eternal_fire.png"
+                        alt="eternal fire"
+                        width="32"
+                        height="32"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        src="./static/img/spells/heaven_sent.png"
+                        alt="heaven sent"
+                        width="32"
+                        height="32"
+                      />
+                    </li>
+                    <li>
+                      <img
+                        src="./static/img/spells/new_life.png"
+                        alt="new life"
+                        width="32"
+                        height="32"
+                      />
+                    </li>
                   </ul>
                 </div> -->
               </div>
@@ -61,6 +82,31 @@
             <div id="info-board" class="info-board">
               <p>Score: <span id="score-display">0</span></p>
               <p>High Score: <span id="high-score-display">0</span></p>
+            </div>
+            <div id="spell-board" class="spell-board" style="display: none">
+              <div class="spell-row">
+                <!-- good cutout for spell logic -->
+                <img
+                  src="./static/img/spells/eternal_fire.png"
+                  alt="eternal fire"
+                  width="40"
+                  height="40"
+                  class="spell-one"
+                /><img
+                  src="./static/img/spells/heaven_sent.png"
+                  alt="heaven sent"
+                  width="40"
+                  height="40"
+                  class="spell-two"
+                />
+                <img
+                  src="./static/img/spells/new_life.png"
+                  alt="new life"
+                  width="40"
+                  height="40"
+                  class="spell-three"
+                />
+              </div>
             </div>
           </div>
 
@@ -83,10 +129,12 @@
                   <p>
                     <strong>How to Play:</strong>
                     Objective: Answer questions about HTML, CSS, and JavaScript
-                    to score points. Health: Be careful! Answering incorrectly
+                    to score points. <br />
+                    <strong>Health:</strong> Be careful! Answering incorrectly
                     will reduce your health. If your health reaches zero, the
-                    game is over. High Score: Your highest score is saved, so
-                    you can always try to beat your personal best.
+                    game is over. <br /><strong>High Score:</strong>
+                    Your highest score is saved, so you can always try to beat
+                    your personal best.
                   </p>
                 </div>
               </div>

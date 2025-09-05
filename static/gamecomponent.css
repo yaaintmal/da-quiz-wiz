@@ -22,6 +22,21 @@
   background-color: #4caf50;
   border-radius: 5px;
 }
+.mana-bar-container {
+  width: 200px;
+  height: 20px;
+  border: 1px solid #000;
+  background-color: #eee;
+  border-radius: 5px;
+  display: none; /* we will set this value to "block" when the game starts */
+}
+
+.mana-bar-fill {
+  height: 100%;
+  /* width: 100%; we will update THIS value with JS */
+  background-color: #1296ee;
+  border-radius: 5px;
+}
 
 /* Answer buttons grid layout */
 .answer-buttons {
@@ -59,4 +74,77 @@
   background-color: #fdd783;
   scale: 1.05;
   padding: 0.5rem 1rem;
+}
+.spell-board {
+  display: flex;
+  width: 100%;
+}
+.spell-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem;
+}
+.spell-one {
+  width: 2rem;
+  height: 2rem;
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+}
+
+.spell-one:hover {
+  filter: grayscale(0%);
+  cursor: hand;
+  animation: ease-in-out 1s;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fdd783;
+  border-radius: 5px;
+  scale: 1.25;
+  /* adding outer glow */
+  outline: #fdd783;
+  filter: drop-shadow(0 4px 6px rgba(2, 2, 5, 0.3));
+}
+.spell-two {
+  width: 2rem;
+  height: 2rem;
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+}
+
+.spell-two:hover {
+  filter: grayscale(0%);
+  cursor: hand;
+  animation: ease-in-out 1s;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fdd783;
+  border-radius: 5px;
+  scale: 1.25;
+  /* adding outer glow */
+  outline: #fdd783;
+  filter: drop-shadow(0 4px 6px rgba(2, 2, 5, 0.3));
+}
+.spell-three {
+  width: 2rem;
+  height: 2rem;
+  filter: grayscale(100%);
+  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+}
+
+.spell-three:hover {
+  filter: grayscale(0%);
+  cursor: hand;
+  animation: ease-in-out 1s;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fdd783;
+  border-radius: 5px;
+  scale: 1.25;
+  /* adding outer glow */
+  outline: #fdd783;
+  filter: drop-shadow(0 4px 6px rgba(2, 2, 5, 0.3));
 }
