@@ -125,6 +125,7 @@ let castCost = 10; // will get its value from an extra function
 //* GAME LOGIC
 
 function startGame() {
+  // reset states n ish to start values for a new game
   isGameActive = true;
   startButton.style.display = "none"; // Hide start button
   currentQuestionIndex = 0;

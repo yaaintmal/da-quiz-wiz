@@ -1,6 +1,8 @@
 // wizard.js
 // AVATAR SWITCHER
 // changing image functions for the wiz
+// TODO: Refactor logic taking emote as an argument
+
 export function wizQuestion() {
   const tuxContainer = document.querySelector("#tux-avatar-container"); // Corrected ID
   tuxContainer.innerHTML = "";
