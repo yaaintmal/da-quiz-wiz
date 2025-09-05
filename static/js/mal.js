@@ -257,7 +257,14 @@ function endGame() {
 startButton.addEventListener("click", () => {
   startGame();
 });
-
+//
+//
+// THE END :c / this is the end
+// errthing got to end
+// even our script
+// wasn't even really started tho' :7
+// ... poor wiz
+//
 //* Further TODO list:
 //* RND BG SWITCHER (yeah, really for both classes!)
 //* RND AVATAR SWITCHER
