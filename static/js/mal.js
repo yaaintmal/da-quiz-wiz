@@ -271,4 +271,4 @@ startButton.addEventListener("click", () => {
 // different jokers for different wizards
 /// FURTHER FURTHER - collab
 /// level design, switching to different stages at different levels
-///
+/// different modes: error spoting, complete-the-code, write-a-test
