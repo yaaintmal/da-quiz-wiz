@@ -1,7 +1,8 @@
-// importing questions
+// importing questions, wiz emotes n stuff
 import { questions } from "./mal-questions.js";
-// importing wiz emotes
 import { wizQuestion, wizHappy, wizSad, wizInfo } from "./mal-wizard.js";
+import { showVersion } from "./mal-version.js";
+
 // importing spells
 // import { spellCast } from "./mal-spells.js";
 
@@ -20,8 +21,6 @@ const lifeRegen = 8;
 const manaRegen = 3;
 
 // ** DEV **
-const version = "0.1.5";
-document.getElementById("version").textContent = `version ${version}`;
 
 // declaring DOM elements
 const startButton = document.getElementById("start-button");
@@ -79,6 +78,7 @@ const lvlTitleContainer = document.getElementById("level-title");
 // });
 
 // Initialising variables
+document.querySelector(".version").textContent = showVersion();
 const pointsPerQuestion = 10; // user defined point system right here!!
 let currentQuestionIndex = 0;
 let score = 0;
