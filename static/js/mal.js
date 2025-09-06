@@ -14,11 +14,16 @@ const intermediateTitle = "Apprentice";
 const expertTitle = "Young Gun Wiz";
 const legendaryTitle = "Coding Ninja";
 
+const lvl1Score = 40;
+const lvl2Score = 85;
+const lvl3Score = 135;
+const lvl4Score = 230;
+
 // penalty multiplier to multiply penalty points (default: 13)
 const penaltyMultiplier = 13;
-// set life & mana regen per round (default: life 8 & mana 3)
-const lifeRegen = 8;
-const manaRegen = 3;
+// set life & mana regen per round (default: life 8 & mana 4)
+const lifeRegen = 9;
+const manaRegen = 4;
 
 // ** DEV **
 
@@ -147,13 +152,13 @@ function getLvlTitle() {
   if (score <= 0) {
     lvlTitle = `${beginnerTitle} (${actualLvl + 1})`;
   }
-  if (score > 30) {
+  if (score > lvl1Score) {
     lvlTitle = `${intermediateTitle} (${actualLvl + 1})`;
   }
-  if (score > 55) {
+  if (score > lvl2Score) {
     lvlTitle = `${expertTitle} (${actualLvl + 1})`;
   }
-  if (score > 85) {
+  if (score > lvl3Score) {
     lvlTitle = `${legendaryTitle} (${actualLvl + 1})`;
   }
   return lvlTitle;
@@ -163,13 +168,13 @@ function getCleanLvlTitle() {
   if (score <= 0) {
     cleanLvlTitle = beginnerTitle;
   }
-  if (score > 30) {
+  if (score > lvl1Score) {
     cleanLvlTitle = intermediateTitle;
   }
-  if (score > 55) {
+  if (score > lvl2Score) {
     cleanLvlTitle = expertTitle;
   }
-  if (score > 85) {
+  if (score > lvl3Score) {
     cleanLvlTitle = legendaryTitle;
   }
   return cleanLvlTitle;
@@ -179,13 +184,13 @@ function lvlUpdater() {
   if (score <= 0) {
     lvlTitleContainer.textContent = getLvlTitle();
   }
-  if (score > 30) {
+  if (score > lvl1Score) {
     lvlTitleContainer.textContent = getLvlTitle();
   }
-  if (score > 55) {
+  if (score > lvl2Score) {
     lvlTitleContainer.textContent = getLvlTitle();
   }
-  if (score > 85) {
+  if (score > lvl3Score) {
     lvlTitleContainer.textContent = getLvlTitle();
   }
 }
@@ -197,8 +202,8 @@ function spellCast(spell) {
       //   document.querySelector(".spell-one").style = "display: none";
       //   break;
       case 2: // tripple regen (+30 health, -50 mana)
-        if (mana >= 80) {
-          updateManaBar(80);
+        if (mana >= 75) {
+          updateManaBar(75);
           spellBOTI = 3;
           document.querySelector(".spell-two").style = "display: none";
           break;
@@ -366,7 +371,7 @@ function endGame() {
   feedbackMessageElement.textContent = "";
   questionTextElement.textContent = "Quiz complete!";
   answerButtonsElement.innerHTML = "";
-  feedbackMessageElement.textContent = `You scored ${score} out of a total of ${
+  feedbackMessageElement.textContent = `You scored ${score} points out of a total of ${
     allQuestionLevels.flat().length
   } questions!
   You can call yourself '${getCleanLvlTitle()}' now!`;
