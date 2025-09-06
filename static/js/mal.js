@@ -73,7 +73,14 @@ let actualLvl = 1; // setting the starting level, we'll add +1 for each level la
 
 // function to update the health bar
 function updateHealthBar(penaltyPoints) {
-  health -= penaltyPoints;
+  if (penaltyPoints > 0) {
+    health -= penaltyPoints;
+  } else {
+    if ((health -= penaltyPoints) > 100) {
+      health = 100;
+    }
+  }
+
   if (health <= 0) {
     health = 0;
     healthBarContainer.innerHTML = "";
@@ -123,27 +130,38 @@ function spellCast(spell) {
   if (health >= 100) {
   } else {
     switch (spell) {
-      case 1:
-        document.querySelector(".spell-one").style = "display: none";
-        break;
-      case 2:
-        document.querySelector(".spell-two").style = "display: none";
-        break;
-      case 3:
-        updateHealthBar(-40);
-        updateManaBar(30);
-        document.querySelector(".spell-three").style = "display: none";
+      // case 1:
+      //   document.querySelector(".spell-one").style = "display: none";
+      //   break;
+      // case 2:
+      //   document.querySelector(".spell-two").style = "display: none";
+      //   break;
+      case 3: // new life (+30 health, -50 mana)
+        if (mana >= 50) {
+          updateHealthBar(-30);
+          updateManaBar(50);
+          document.querySelector(".spell-three").style = "display: none";
+          break;
+        }
         break;
       default:
       // do nothing
     }
   }
 }
+// used to reset spells after cooldown
+// will be called atm at the start of each new round / more logic?
+function spellReset() {
+  // document.querySelector(".spell-one").style = "display: block";
+  // document.querySelector(".spell-two").style = "display: block";
+  document.querySelector(".spell-three").style = "display: block";
+}
+
 document.addEventListener("click", (event) => {
   if (event.target.classList.contains("spell-one")) {
-    spellCast(1);
+    // spellCast(1);
   } else if (event.target.classList.contains("spell-two")) {
-    spellCast(2);
+    // spellCast(2);
   } else if (event.target.classList.contains("spell-three")) {
     spellCast(3);
   }
@@ -210,6 +228,7 @@ function showQuestion() {
     // setting category title
     categoryTitleContainer.textContent = `Kategorie: ${currentQuestion.category}`;
     lvlUpdater();
+    spellReset();
 
     // setting questions
     questionTextElement.textContent = currentQuestion.question;
