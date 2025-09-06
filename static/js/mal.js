@@ -36,11 +36,6 @@ const manaBarContainer = document.getElementById("mana-bar-container");
 const categoryTitleContainer = document.getElementById("categorie-title");
 const lvlTitleContainer = document.getElementById("level-title");
 
-//* not used at the moment
-// const wizardAvatar = document.getElementById("wizard-avatar");
-// const healthBarFill = document.getElementById("health-bar-fill");
-// const wpContainer = document.getElementById("game-container");
-
 // * Further Implementations:
 //* RND BG SWITCHER (yeah, really for both classes!) /*edited: those damn pseudo-classes- not working as intended... YET!*/
 
@@ -111,10 +106,7 @@ function updateHealthBar(penaltyPoints) {
     health = 0;
     healthBarContainer.innerHTML = "";
     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
-    // setting currentQuestionIndex to 999 to end the game
-    // as endgame() with currentQuestionIndex < questions.length will trigger a new question
     currentQuestionIndex = questions.length;
-    // second thought: probably better to set currentQuestionIndex to questions.length, in case we got over 1000 questions :)))
   } else {
     healthBarContainer.innerHTML = "";
     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
@@ -212,8 +204,8 @@ function spellCast(spell) {
     }
   }
 }
+
 // used to reset spells after cooldown
-// will be called atm at the start of each new round / more logic?
 function spellReset() {
   if (mana > 0) {
     // document.querySelector(".spell-one").style = "display: block";
@@ -231,25 +223,6 @@ document.addEventListener("click", (event) => {
     spellCast(3);
   }
 });
-// ** Further logic for mana bar
-// * will be implemented later
-// Function to update the mana bar
-let castCost = 10; // will get its value from an extra function
-// function updateManaBar(castCost) {
-//   health -= penaltyPoints;
-//   if (health <= 0) {
-//     health = 0;
-//     healthBarContainer.innerHTML = "";
-//     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
-//     // setting currentQuestionIndex to 999 to end the game
-//     // as endgame() with currentQuestionIndex < questions.length will trigger a new question
-//     currentQuestionIndex = 999;
-//     // second thought: probably better to set currentQuestionIndex to questions.length, in case we got over 1000 questions :)))
-//   } else {
-//     healthBarContainer.innerHTML = "";
-//     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
-//   }
-// }
 
 // Where the fun begins...
 
@@ -283,13 +256,6 @@ function showQuestion() {
   if (currentQuestionIndex < questions.length) {
     let currentQuestion = questions[currentQuestionIndex];
 
-    //* at this point we should set all question related stuff, variables n ish
-    //* check >> console.log(currentQuestion); / we got errthing we need right here,
-    //* console to see all content of currentQuestion
-    //
-    // console.log(currentQuestionIndex);
-    // console.log(currentQuestion);
-
     // setting category title
     categoryTitleContainer.textContent = `Kategorie: ${currentQuestion.category}`;
     lvlUpdater();
@@ -311,13 +277,12 @@ function showQuestion() {
       answerButtonsElement.appendChild(button);
     });
   } else {
-    // if currentQuestionIndex >= questions.length / we reached the end of the questions-array
+    // if currentQuestionIndex >= questions.length
     endGame();
   }
 }
 
 function selectAnswer(e) {
-  // Check if the selected answer is correct
   const selectedButton = e.target;
   const isCorrect = selectedButton.dataset.correct === "true";
   let penaltyPoints = questions[currentQuestionIndex].penalty || 0;
@@ -325,7 +290,6 @@ function selectAnswer(e) {
   if (penaltyPoints > 0) {
     penaltyPoints = parseInt(penaltyPoints);
   }
-  // console.log(penaltyPoints);
 
   if (isCorrect) {
     score += pointsPerQuestion;
@@ -343,7 +307,7 @@ function selectAnswer(e) {
   }
   scoreDisplay.textContent = score;
 
-  // Disable all buttons after an answer is selected
+  // Disabling all buttons after an answer is selected
   Array.from(answerButtonsElement.children).forEach((button) => {
     button.disabled = true;
   });
@@ -353,7 +317,7 @@ function selectAnswer(e) {
     currentQuestionIndex++;
     showQuestion();
     pointsPerQuestion;
-  }, 2500); // 1.5 second delay /* using 2.5 for testing purposes */
+  }, 2500); // 2.5seconds delay
 }
 
 function endGame() {
@@ -377,15 +341,6 @@ function endGame() {
   manaBarContainer.style.display = "none";
   mana = 100;
   manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
-  // block automatically starting of new game
-  // edited: realisied via updateHealthBar() function
-
-  // should we save the high score? / not sure yet, it's late!
-  // prob not as it's already using local storage
-  // let highScore = localStorage.getItem("highScore");
-  // if (highScore === null) {
-  //   highScore = 0;
-  // }
 
   if (score > highScore) {
     highScore = score;
@@ -408,15 +363,16 @@ startButton.addEventListener("click", () => {
 // ... poor wiz
 //
 //* Further TODO list:
+//* adding more spells
 //* RND BG SWITCHER (yeah, really for both classes!)
-//* RND AVATAR SWITCHER
-//* Mana bar logic & Styling
+//
 //* replacing bg-images
 // * (need more high for responsive design > comment out in css width&height values actually set to fixed px")
 //* Joker logic
 // Further further TODO list:
 // refactoring to a wiz class > initiating different wizards classes << MP? POOOOAHHHH
 // different avatars for different wizards
+// RND AVATAR SWITCHER
 // different jokers for different wizards
 /// FURTHER FURTHER - collab
 /// level design, switching to different stages at different levels
