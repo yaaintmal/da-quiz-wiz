@@ -423,7 +423,6 @@ startButton.addEventListener("click", () => {
 //
 //* replacing bg-images
 // * (need more high for responsive design > comment out in css width&height values actually set to fixed px")
-//* Joker logic
 // Further further TODO list:
 // refactoring to a wiz class > initiating different wizards classes << MP? POOOOAHHHH
 // different avatars for different wizards
