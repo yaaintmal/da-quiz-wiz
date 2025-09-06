@@ -2,6 +2,8 @@
 
 Welcome to Tux Quiz Wiz, a browser-based quiz game designed to test your knowledge of web development fundamentals!
 
+---
+
 ## 🎮 How to Play
 
 The goal of the game is to answer questions about HTML, CSS, and JavaScript. The quiz is divided into multiple levels, each with a set of questions. Your score is based on the number of correct answers, and your performance determines your title, ranging from "Novice" to "Coding Ninja".
@@ -38,7 +40,7 @@ Your character, TuxWiz, has two important meters: Health and Mana. Managing them
 # 🧙🏼‍♀️🧙🏾 Spells
 
 As you advance, you'll unlock spells that can help you. They appear on the spell board and can be used by clicking on them.
-- Heaven Sent: This spell provides a significant boost to your health over the next three rounds, but it comes at a cost of a larger mana and health regeneration penalty per round. You can only use this spell once per game.
+- Heaven Sent: This spell provides a significant boost to your health over the next three rounds, but it comes at a cost of a larger mana and health regeneration penalty per round. You (prob) can only use this spell once per game.
 - New Life: This spell gives you an instant, one-time health boost. It costs a certain amount of mana to cast and can also only be used once per game.
 
 ---
@@ -49,3 +51,30 @@ The game features multiple levels. As you progress and accumulate points, your t
 - Novice * Apprentice
 - Young Gun Wiz
 - Coding Ninja
+
+---
+
+# Changelog
+## Version 0.1.9.2
+- added react.js questions
+- rearranged questions-template
+
+## Version 0.1.9.1
+- added untested mobile compability
+- added tailwind css question - level
+- adjusted title-lvl and necessary points
+- adjusted regen to Life:9 / Mana:4
+
+## Version 0.1.8.4
+- added spell: blessing of the instructor > heaven sent
+- balancing: adjusted penaltypoints
+- adjusted regen to Life:9 / Mana:3
+
+## Version 0.1.7.6
+- added option for the penalty-multiplier
+- adjusted penalty-multiplier
+- various balancing, adjusted regen to Life:8 / Mana:3
+
+## Version 0.1.5.2
+- added life- & mana-regeneration per round
+#- updated spell-costs
