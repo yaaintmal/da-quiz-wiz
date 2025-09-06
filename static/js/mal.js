@@ -4,7 +4,8 @@ import { questions } from "./mal-questions.js";
 import { wizQuestion, wizHappy, wizSad, wizInfo } from "./mal-wizard.js";
 // importing spells
 // import { spellCast } from "./mal-spells.js";
-
+const version = "0.1.3";
+document.getElementById("version").textContent = `version ${version}`;
 // config stuff
 // set titles for different skill levels
 const beginnerTitle = "Novice";
