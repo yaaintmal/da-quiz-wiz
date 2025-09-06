@@ -19,6 +19,11 @@ const manaBarContainer = document.getElementById("mana-bar-container");
 const categoryTitleContainer = document.getElementById("categorie-title");
 const lvlTitleContainer = document.getElementById("level-title");
 
+const beginnerTitle = "Novice";
+const intermediateTitle = "Apprentice";
+const expertTitle = "Young Gun Wiz";
+const legendaryTitle = "Coding Ninja";
+
 //* not used at the moment
 // const wizardAvatar = document.getElementById("wizard-avatar");
 // const healthBarFill = document.getElementById("health-bar-fill");
@@ -112,18 +117,51 @@ function updateManaBar(spellPoints) {
 }
 // function to update the level title container > actual level to display
 //* FURTHER IMPLMENTATION IDEA : adding some cool effects in case we level up!
-function lvlUpdater() {
+function getLvlTitle() {
+  let lvlTitle = `${beginnerTitle}`;
   if (score <= 0) {
-    lvlTitleContainer.textContent = `Novice (${actualLvl})`;
+    lvlTitle = `${beginnerTitle} (${actualLvl})`;
   }
   if (score > 30) {
-    lvlTitleContainer.textContent = `Apprentice (${actualLvl + 1})`;
+    lvlTitle = `${intermediateTitle} (${actualLvl + 1})`;
   }
   if (score > 55) {
-    lvlTitleContainer.textContent = `Young Gun Wiz (${actualLvl + 2})`;
+    lvlTitle = `${expertTitle} (${actualLvl + 2})`;
   }
   if (score > 85) {
-    lvlTitleContainer.textContent = `Code Ninja (${actualLvl + 3})`;
+    lvlTitle = `${legendaryTitle} (${actualLvl + 3})`;
+  }
+  return lvlTitle;
+}
+function getCleanLvlTitle() {
+  let cleanLvlTitle = beginnerTitle;
+  if (score <= 0) {
+    cleanLvlTitle = beginnerTitle;
+  }
+  if (score > 30) {
+    cleanLvlTitle = intermediateTitle;
+  }
+  if (score > 55) {
+    cleanLvlTitle = expertTitle;
+  }
+  if (score > 85) {
+    cleanLvlTitle = legendaryTitle;
+  }
+  return cleanLvlTitle;
+}
+
+function lvlUpdater() {
+  if (score <= 0) {
+    lvlTitleContainer.textContent = getLvlTitle();
+  }
+  if (score > 30) {
+    lvlTitleContainer.textContent = getLvlTitle();
+  }
+  if (score > 55) {
+    lvlTitleContainer.textContent = getLvlTitle();
+  }
+  if (score > 85) {
+    lvlTitleContainer.textContent = getLvlTitle();
   }
 }
 function spellCast(spell) {
@@ -296,7 +334,10 @@ function endGame() {
   feedbackMessageElement.textContent = "";
   questionTextElement.textContent = "Quiz complete!";
   answerButtonsElement.innerHTML = "";
-  feedbackMessageElement.textContent = `You scored ${score} out of ${questions.length} questions!`;
+  feedbackMessageElement.textContent = `You scored ${score} out of ${
+    questions.length
+  } questions!
+  You can call yourself '${getCleanLvlTitle()}' now!`;
   startButton.textContent = "Play Again";
   startButton.style.display = "block";
   wizardPrompt.textContent = "Thanks for playing!";
