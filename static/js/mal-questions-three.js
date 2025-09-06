@@ -20,7 +20,7 @@ const questions_three = [
         correct: false,
       },
     ],
-    penalty: 5,
+    penalty: 3,
     category: "JS",
   },
   {
@@ -43,7 +43,7 @@ const questions_three = [
         correct: false,
       },
     ],
-    penalty: 5,
+    penalty: 1,
     category: "CSS",
   },
   {
@@ -67,7 +67,7 @@ const questions_three = [
         correct: false,
       },
     ],
-    penalty: 4,
+    penalty: 3,
     category: "HTML",
   },
   {
@@ -91,7 +91,7 @@ const questions_three = [
         correct: false,
       },
     ],
-    penalty: 5,
+    penalty: 4,
     category: "JS",
   },
   {

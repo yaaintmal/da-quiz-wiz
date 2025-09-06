@@ -8,7 +8,7 @@ const questions_two = [
       { text: "map()", correct: true },
       { text: "reduce()", correct: false },
     ],
-    penalty: 5,
+    penalty: 4,
     category: "JS",
   },
   {
@@ -19,7 +19,7 @@ const questions_two = [
       { text: "To adjust the text size.", correct: false },
       { text: "To create a 3D effect.", correct: false },
     ],
-    penalty: 4,
+    penalty: 2,
     category: "CSS",
   },
   {
@@ -31,7 +31,7 @@ const questions_two = [
       { text: "<iframe>", correct: true },
       { text: "<embed>", correct: false },
     ],
-    penalty: 5,
+    penalty: 3,
     category: "HTML",
   },
   {
@@ -42,7 +42,7 @@ const questions_two = [
       { text: "To handle asynchronous operations.", correct: true },
       { text: "To define a class.", correct: false },
     ],
-    penalty: 3,
+    penalty: 4,
     category: "JS",
   },
   {
@@ -77,7 +77,7 @@ const questions_two = [
       { text: "undefined", correct: false },
       { text: "string", correct: false },
     ],
-    penalty: 5,
+    penalty: 2,
     category: "JS",
   },
   {
