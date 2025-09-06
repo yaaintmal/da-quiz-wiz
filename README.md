@@ -63,7 +63,10 @@ The game features multiple levels. As you progress and accumulate points, your t
 - added untested mobile compability
 - added tailwind css question - level
 - adjusted title-lvl and necessary points
-- adjusted regen to Life:9 / Mana:4
+- balancing: adjusted regen to Life:9 / Mana:4
+- balancing: BOTI now costs 75 Mana instead of 80
+- balancing: BOTI now boosts liferegen * 4 & mana * 2 per round
+- balancing: instant heal-effect of "new life" now grants 50 HP instead of 40
 
 ## Version 0.1.8.4
 - added spell: blessing of the instructor > heaven sent
