@@ -4,8 +4,8 @@ import { questions } from "./mal-questions.js";
 import { wizQuestion, wizHappy, wizSad, wizInfo } from "./mal-wizard.js";
 // importing spells
 // import { spellCast } from "./mal-spells.js";
-const version = "0.1.3";
-document.getElementById("version").textContent = `version ${version}`;
+
+// ** USER ***/
 // config stuff
 // set titles for different skill levels
 const beginnerTitle = "Novice";
@@ -13,9 +13,15 @@ const intermediateTitle = "Apprentice";
 const expertTitle = "Young Gun Wiz";
 const legendaryTitle = "Coding Ninja";
 
-// set life & mana regen per round
-// const lifeRegen = 5; / not implemented yet
-// const manaRegen = 2; / not implemented yet
+// penalty multiplier to multiply penalty points (default: 13)
+const penaltyMultiplier = 13;
+// set life & mana regen per round (default: life 8 & mana 3)
+const lifeRegen = 8;
+const manaRegen = 3;
+
+// ** DEV **
+const version = "0.1.3";
+document.getElementById("version").textContent = `version ${version}`;
 
 // declaring DOM elements
 const startButton = document.getElementById("start-button");
@@ -83,6 +89,14 @@ let health = 100;
 let mana = 100;
 let actualLvl = 1; // setting the starting level, we'll add +1 for each level later
 
+function reGen() {
+  if (health && mana) {
+    updateHealthBar(-lifeRegen);
+    updateManaBar(-manaRegen);
+  }
+  return null;
+}
+
 // function to update the health bar
 function updateHealthBar(penaltyPoints) {
   if (penaltyPoints > 0) {
@@ -109,7 +123,14 @@ function updateHealthBar(penaltyPoints) {
 
 // function to update the mana bar
 function updateManaBar(spellPoints) {
-  mana -= spellPoints;
+  if (spellPoints > 0) {
+    mana -= spellPoints;
+  } else {
+    if ((mana -= spellPoints) > 100) {
+      mana = 100;
+    }
+  }
+
   if (mana <= 0) {
     mana = 0;
     manaBarContainer.innerHTML = "";
@@ -276,6 +297,7 @@ function showQuestion() {
     categoryTitleContainer.textContent = `Kategorie: ${currentQuestion.category}`;
     lvlUpdater();
     spellReset();
+    reGen();
 
     // setting questions
     questionTextElement.textContent = currentQuestion.question;
@@ -319,7 +341,7 @@ function selectAnswer(e) {
       "Incorrect. ❌\nYou lost " + penaltyPoints + " points.";
     selectedButton.classList.add("incorrect");
     score -= penaltyPoints;
-    updateHealthBar(penaltyPoints * 10);
+    updateHealthBar(penaltyPoints * penaltyMultiplier);
     wizSad();
   }
   scoreDisplay.textContent = score;
