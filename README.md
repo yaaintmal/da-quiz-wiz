@@ -10,7 +10,6 @@ The goal of the game is to answer questions about HTML, CSS, and JavaScript. The
 
 To start, simply click the "Start Quiz" button. A question will appear, along with four possible answers. Click on the answer you believe is correct.
 
----
 
 # ⚡ Health, Mana, and Regeneration
 
@@ -52,7 +51,6 @@ The game features multiple levels. As you progress and accumulate points, your t
 - Young Gun Wiz
 - Coding Ninja
 
----
 
 # Changelog
 ## Version 0.1.9.2
