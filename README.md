@@ -1,16 +1,51 @@
-## WBS/CS: Coding Quiz Wiz 🧙‍♀️🧙🏾
+### The Coding Tux Quiz Wiz
 
-WBS/CS 'Coding Quiz Wiz' is a browser-based quiz game designed to test your knowledge of web development fundamentals. Put your skills to the test and see if you have what it takes to become the ultimate "Coding Quiz Wiz"!
+Welcome to Tux Quiz Wiz, a browser-based quiz game designed to test your knowledge of web development fundamentals!
 
-# 🏁🎯 How to Play 
+## 🎮 How to Play
 
-  + Objective: Answer questions about HTML, CSS, and JavaScript to score points.
-  + Health: Be careful! Answering incorrectly will reduce your health. If your health reaches zero, the game is over.
-  + High Score: Your highest score is saved, so you can always try to beat your personal best.
+The goal of the game is to answer questions about HTML, CSS, and JavaScript. The quiz is divided into multiple levels, each with a set of questions. Your score is based on the number of correct answers, and your performance determines your title, ranging from "Novice" to "Coding Ninja".
 
-# Features 💡
-    + Interactive Quizzes: Test your knowledge with a variety of questions in different categories.
-    + Health System: A health bar tracks your progress, making the game more challenging.
-    + Scoring: Earn points for correct answers and lose health for incorrect ones.
-    + High Score Tracking: See how you stack up against your previous attempts.
-    + Fun Design: The game features a wizard-themed interface with a fun and engaging design.
+To start, simply click the "Start Quiz" button. A question will appear, along with four possible answers. Click on the answer you believe is correct.
+
+---
+
+# ⚡ Health, Mana, and Regeneration
+
+Your character, TuxWiz, has two important meters: Health and Mana. Managing them is key to succeeding in the game.
+
+
+# Health ❤️‍🩹
+
+   - Answering correctly: You score points and your health is not affected.
+   - Answering incorrectly: You lose health points. The number of points you lose is determined by the "penalty" value of the question multiplied by a penalty multiplier. If your health reaches zero, the game is over.
+
+
+# Mana 🪄
+
+- Regeneration: Both health and mana regenerate slightly with each new question.
+- Spells: You can use spells to heal yourself. Casting a spell will cost you mana. If you don't have enough mana, you can't cast the spell.
+- Note: There is a special condition where your character may experience a higher regeneration rate, but this comes with a temporary increased penalty to your health and mana regeneration. Use your spells wisely!
+
+
+# 🏆 Scoring
+
+- Correct Answers: You gain a fixed number of points for each correct answer.
+- Incorrect Answers: You lose points based on the question's penalty value.
+- High Score: Your highest score is saved, so you can always try to beat your personal best.
+
+
+# 🧙🏼‍♀️🧙🏾 Spells
+
+As you advance, you'll unlock spells that can help you. They appear on the spell board and can be used by clicking on them.
+- Heaven Sent: This spell provides a significant boost to your health over the next three rounds, but it comes at a cost of a larger mana and health regeneration penalty per round. You can only use this spell once per game.
+- New Life: This spell gives you an instant, one-time health boost. It costs a certain amount of mana to cast and can also only be used once per game.
+
+---
+
+# ✨ Levels and Titles
+
+The game features multiple levels. As you progress and accumulate points, your title will change to reflect your growing skills:
+- Novice * Apprentice
+- Young Gun Wiz
+- Coding Ninja
