@@ -14,9 +14,9 @@ const intermediateTitle = "Apprentice";
 const expertTitle = "Young Gun Wiz";
 const legendaryTitle = "Coding Ninja";
 
-const lvl1Score = 40;
-const lvl2Score = 85;
-const lvl3Score = 135;
+const lvl1Score = 55;
+const lvl2Score = 99;
+const lvl3Score = 142;
 const lvl4Score = 230;
 
 // penalty multiplier to multiply penalty points (default: 13)
@@ -369,6 +369,7 @@ function endGame() {
   wizInfo();
   isGameActive = false;
   feedbackMessageElement.textContent = "";
+  document.getElementById("spell-board").style.display = `none`;
   questionTextElement.textContent = "Quiz complete!";
   answerButtonsElement.innerHTML = "";
   feedbackMessageElement.textContent = `You scored ${score} points out of a total of ${

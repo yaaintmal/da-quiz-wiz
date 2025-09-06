@@ -1,5 +1,5 @@
 // setting actual version
-const version = "0.1.8.6";
+const version = "0.1.8.7";
 
 function showVersion() {
   return `version ${version}`;
