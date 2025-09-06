@@ -322,6 +322,7 @@ function selectAnswer(e) {
 
 function endGame() {
   wizInfo();
+  document.querySelector(".spell-three").style = "display: none";
   isGameActive = false;
   feedbackMessageElement.textContent = "";
   questionTextElement.textContent = "Quiz complete!";
