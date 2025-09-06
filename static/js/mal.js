@@ -1,5 +1,5 @@
 // importing questions, wiz emotes n stuff
-import { questions } from "./mal-questions.js";
+import { allQuestionLevels } from "./mal-all-questions.js";
 import { wizQuestion, wizHappy, wizSad, wizInfo } from "./mal-wizard.js";
 import { showVersion } from "./mal-version.js";
 
@@ -19,6 +19,9 @@ const penaltyMultiplier = 13;
 // set life & mana regen per round (default: life 8 & mana 3)
 const lifeRegen = 8;
 const manaRegen = 3;
+
+// further config for advanced users to set the startlevel 1 - 3
+// const startLevel = 0;
 
 // ** DEV **
 
@@ -74,7 +77,7 @@ const lvlTitleContainer = document.getElementById("level-title");
 
 // Initialising variables
 document.querySelector(".version").textContent = showVersion();
-const pointsPerQuestion = 10; // user defined point system right here!!
+const pointsPerQuestion = 10; // user defined point system right here!
 let currentQuestionIndex = 0;
 let score = 0;
 let isGameActive = false;
@@ -82,7 +85,8 @@ let highScore = localStorage.getItem("highScore") || 0; // Load high score from 
 highScoreDisplay.textContent = highScore;
 let health = 100;
 let mana = 100;
-let actualLvl = 1; // setting the starting level, we'll add +1 for each level later
+let actualLvl = 0; // setting the starting level // later prob like : let actualLvl = startLevel;
+let currentQuestions = [];
 
 function reGen() {
   if (health && mana) {
@@ -106,7 +110,7 @@ function updateHealthBar(penaltyPoints) {
     health = 0;
     healthBarContainer.innerHTML = "";
     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
-    currentQuestionIndex = questions.length;
+    currentQuestionIndex = currentQuestions.length; // This will trigger endGame()
   } else {
     healthBarContainer.innerHTML = "";
     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
@@ -137,16 +141,16 @@ function updateManaBar(spellPoints) {
 function getLvlTitle() {
   let lvlTitle = `${beginnerTitle}`;
   if (score <= 0) {
-    lvlTitle = `${beginnerTitle} (${actualLvl})`;
+    lvlTitle = `${beginnerTitle} (${actualLvl + 1})`;
   }
   if (score > 30) {
     lvlTitle = `${intermediateTitle} (${actualLvl + 1})`;
   }
   if (score > 55) {
-    lvlTitle = `${expertTitle} (${actualLvl + 2})`;
+    lvlTitle = `${expertTitle} (${actualLvl + 1})`;
   }
   if (score > 85) {
-    lvlTitle = `${legendaryTitle} (${actualLvl + 3})`;
+    lvlTitle = `${legendaryTitle} (${actualLvl + 1})`;
   }
   return lvlTitle;
 }
@@ -224,8 +228,7 @@ document.addEventListener("click", (event) => {
   }
 });
 
-// Where the fun begins...
-
+//** */ Where the fun begins...
 //* GAME LOGIC
 
 function startGame() {
@@ -234,11 +237,15 @@ function startGame() {
   startButton.style.display = "none"; // Hide start button
   currentQuestionIndex = 0;
   score = 0;
+  actualLvl = 0; // Start at the first level (index 0)
+  currentQuestions = allQuestionLevels[actualLvl];
   scoreDisplay.textContent = score;
   feedbackMessageElement.textContent = "";
   questionContainer.style.display = "block"; // Ensure question container is visible
   wizardPrompt.textContent = "Let's test your knowledge, adventurer!";
   showQuestion();
+  health = 100;
+  mana = 100;
   healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
   healthBarContainer.style.display = "block";
   document.getElementById("spell-board").style.display = `block`;
@@ -247,45 +254,64 @@ function startGame() {
 }
 
 function showQuestion() {
+  if (currentQuestionIndex >= currentQuestions.length) {
+    // Check if the user survived the current level
+    if (health > 0) {
+      // If there are more levels, advance to the next one
+      if (actualLvl < allQuestionLevels.length - 1) {
+        actualLvl++;
+        currentQuestionIndex = 0;
+        currentQuestions = allQuestionLevels[actualLvl];
+        wizardPrompt.textContent = `You survived this level! 🥳 I'll create a portal to the next stage... hold on!`;
+        setTimeout(showQuestion, 10500);
+        return;
+      } else {
+        // All levels are complete
+        endGame();
+        return;
+      }
+    } else {
+      // If health is 0 or less, end the game immediately
+      endGame();
+      return;
+    }
+  }
+
   // Reset state
   answerButtonsElement.innerHTML = "";
   feedbackMessageElement.textContent = "";
   wizQuestion();
-  wizardPrompt.textContent = `Question ${currentQuestionIndex + 1}:`;
+  wizardPrompt.textContent = `Level ${actualLvl + 1}, Question ${
+    currentQuestionIndex + 1
+  }:`;
 
-  if (currentQuestionIndex < questions.length) {
-    let currentQuestion = questions[currentQuestionIndex];
+  let currentQuestion = currentQuestions[currentQuestionIndex];
 
-    // setting category title
-    categoryTitleContainer.textContent = `Kategorie: ${currentQuestion.category}`;
-    lvlUpdater();
-    spellReset();
-    reGen();
+  // setting category title
+  categoryTitleContainer.textContent = `Kategorie: ${currentQuestion.category}`;
+  lvlUpdater();
+  spellReset();
+  reGen();
 
-    // setting questions
-    questionTextElement.textContent = currentQuestion.question;
-    // looping through answers
-    currentQuestion.answers.forEach((answer) => {
-      const button = document.createElement("button");
-      button.textContent = answer.text;
-      button.classList.add("answer-btn");
-      if (answer.correct) {
-        button.dataset.correct = answer.correct;
-        button.dataset.penaltyPoints = questions.penalty;
-      }
-      button.addEventListener("click", selectAnswer);
-      answerButtonsElement.appendChild(button);
-    });
-  } else {
-    // if currentQuestionIndex >= questions.length
-    endGame();
-  }
+  // setting questions
+  questionTextElement.textContent = currentQuestion.question;
+  // looping through answers
+  currentQuestion.answers.forEach((answer) => {
+    const button = document.createElement("button");
+    button.textContent = answer.text;
+    button.classList.add("answer-btn");
+    if (answer.correct) {
+      button.dataset.correct = answer.correct;
+    }
+    button.addEventListener("click", selectAnswer);
+    answerButtonsElement.appendChild(button);
+  });
 }
 
 function selectAnswer(e) {
   const selectedButton = e.target;
   const isCorrect = selectedButton.dataset.correct === "true";
-  let penaltyPoints = questions[currentQuestionIndex].penalty || 0;
+  let penaltyPoints = currentQuestions[currentQuestionIndex].penalty || 0;
 
   if (penaltyPoints > 0) {
     penaltyPoints = parseInt(penaltyPoints);
@@ -294,7 +320,7 @@ function selectAnswer(e) {
   if (isCorrect) {
     score += pointsPerQuestion;
     feedbackMessageElement.textContent =
-      "Correct! ✨ You won " + pointsPerQuestion + " points.";
+      "Correct! ✨ You won " + pointsPerQuestion + " points!";
     selectedButton.classList.add("correct");
     wizHappy();
   } else {
@@ -322,13 +348,12 @@ function selectAnswer(e) {
 
 function endGame() {
   wizInfo();
-  document.querySelector(".spell-three").style = "display: none";
   isGameActive = false;
   feedbackMessageElement.textContent = "";
   questionTextElement.textContent = "Quiz complete!";
   answerButtonsElement.innerHTML = "";
-  feedbackMessageElement.textContent = `You scored ${score} out of ${
-    questions.length
+  feedbackMessageElement.textContent = `You scored ${score} out of a total of ${
+    allQuestionLevels.flat().length
   } questions!
   You can call yourself '${getCleanLvlTitle()}' now!`;
   startButton.textContent = "Play Again";
