@@ -113,7 +113,7 @@ function updateHealthBar(penaltyPoints) {
     healthBarContainer.innerHTML = `<div class="health-bar-fill" id="health-bar-fill" style="width: ${health}%"></div>`;
     // setting currentQuestionIndex to 999 to end the game
     // as endgame() with currentQuestionIndex < questions.length will trigger a new question
-    currentQuestionIndex = 999;
+    currentQuestionIndex = questions.length;
     // second thought: probably better to set currentQuestionIndex to questions.length, in case we got over 1000 questions :)))
   } else {
     healthBarContainer.innerHTML = "";
@@ -135,9 +135,6 @@ function updateManaBar(spellPoints) {
     mana = 0;
     manaBarContainer.innerHTML = "";
     manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
-    // setting currentQuestionIndex to 999 to end the game
-    // as endgame() with currentQuestionIndex < questions.length will trigger a new question
-    // second thought: probably better to set currentQuestionIndex to questions.length, in case we got over 1000 questions :)))
   } else {
     manaBarContainer.innerHTML = "";
     manaBarContainer.innerHTML = `<div class="mana-bar-fill" id="mana-bar-fill" style="width: ${mana}%"></div>`;
