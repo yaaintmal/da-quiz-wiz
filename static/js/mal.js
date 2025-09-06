@@ -20,7 +20,7 @@ const lifeRegen = 8;
 const manaRegen = 3;
 
 // ** DEV **
-const version = "0.1.3";
+const version = "0.1.5";
 document.getElementById("version").textContent = `version ${version}`;
 
 // declaring DOM elements
