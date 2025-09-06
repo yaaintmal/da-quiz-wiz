@@ -80,4 +80,4 @@ The game features multiple levels. As you progress and accumulate points, your t
 
 ## Version 0.1.5.2
 - added life- & mana-regeneration per round
-#- updated spell-costs
+- updated spell-costs
