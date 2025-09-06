@@ -42,7 +42,6 @@ As you advance, you'll unlock spells that can help you. They appear on the spell
 - Heaven Sent: This spell provides a significant boost to your health over the next three rounds, but it comes at a cost of a larger mana and health regeneration penalty per round. You (prob) can only use this spell once per game.
 - New Life: This spell gives you an instant, one-time health boost. It costs a certain amount of mana to cast and can also only be used once per game.
 
----
 
 # ✨ Levels and Titles
 
@@ -51,6 +50,7 @@ The game features multiple levels. As you progress and accumulate points, your t
 - Young Gun Wiz
 - Coding Ninja
 
+---
 
 # Changelog
 ## Version 0.1.9.2
