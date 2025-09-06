@@ -5,6 +5,17 @@ import { wizQuestion, wizHappy, wizSad, wizInfo } from "./mal-wizard.js";
 // importing spells
 // import { spellCast } from "./mal-spells.js";
 
+// config stuff
+// set titles for different skill levels
+const beginnerTitle = "Novice";
+const intermediateTitle = "Apprentice";
+const expertTitle = "Young Gun Wiz";
+const legendaryTitle = "Coding Ninja";
+
+// set life & mana regen per round
+// const lifeRegen = 5; / not implemented yet
+// const manaRegen = 2; / not implemented yet
+
 // declaring DOM elements
 const startButton = document.getElementById("start-button");
 const questionContainer = document.getElementById("question-container");
@@ -18,11 +29,6 @@ const healthBarContainer = document.getElementById("health-bar-container");
 const manaBarContainer = document.getElementById("mana-bar-container");
 const categoryTitleContainer = document.getElementById("categorie-title");
 const lvlTitleContainer = document.getElementById("level-title");
-
-const beginnerTitle = "Novice";
-const intermediateTitle = "Apprentice";
-const expertTitle = "Young Gun Wiz";
-const legendaryTitle = "Coding Ninja";
 
 //* not used at the moment
 // const wizardAvatar = document.getElementById("wizard-avatar");
@@ -190,9 +196,11 @@ function spellCast(spell) {
 // used to reset spells after cooldown
 // will be called atm at the start of each new round / more logic?
 function spellReset() {
-  // document.querySelector(".spell-one").style = "display: block";
-  // document.querySelector(".spell-two").style = "display: block";
-  document.querySelector(".spell-three").style = "display: block";
+  if (mana > 0) {
+    // document.querySelector(".spell-one").style = "display: block";
+    // document.querySelector(".spell-two").style = "display: block";
+    document.querySelector(".spell-three").style = "display: block";
+  }
 }
 
 document.addEventListener("click", (event) => {
