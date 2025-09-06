@@ -26,7 +26,16 @@ const lifeRegen = 9;
 const manaRegen = 4;
 
 // ** DEV **
-
+//    no editing here please
+// *  thank you :3
+//    I mean, it's a beta version after all :3
+// *  if you got some good ideas, please let me know
+//    or contribute with a side branch!
+//
+//
+//
+//
+//
 // declaring DOM elements
 const startButton = document.getElementById("start-button");
 const questionContainer = document.getElementById("question-container");
