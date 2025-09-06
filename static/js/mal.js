@@ -20,9 +20,6 @@ const penaltyMultiplier = 13;
 const lifeRegen = 8;
 const manaRegen = 3;
 
-// further config for advanced users to set the startlevel 1 - 3
-// const startLevel = 0;
-
 // ** DEV **
 
 // declaring DOM elements
@@ -85,12 +82,19 @@ let highScore = localStorage.getItem("highScore") || 0; // Load high score from 
 highScoreDisplay.textContent = highScore;
 let health = 100;
 let mana = 100;
-let actualLvl = 0; // setting the starting level // later prob like : let actualLvl = startLevel;
+let actualLvl = 0; // setting the starting level, we'll add +1 for each level later
 let currentQuestions = [];
+let spellBOTI = 0;
 
 function reGen() {
   if (health && mana) {
-    updateHealthBar(-lifeRegen);
+    if (spellBOTI > 0) {
+      updateHealthBar(-lifeRegen * 4);
+      updateManaBar(-manaRegen * 2);
+      spellBOTI--;
+    } else {
+      updateHealthBar(-lifeRegen);
+    }
     updateManaBar(-manaRegen);
   }
   return null;
@@ -192,9 +196,14 @@ function spellCast(spell) {
       // case 1:
       //   document.querySelector(".spell-one").style = "display: none";
       //   break;
-      // case 2:
-      //   document.querySelector(".spell-two").style = "display: none";
-      //   break;
+      case 2: // tripple regen (+30 health, -50 mana)
+        if (mana >= 80) {
+          updateManaBar(80);
+          spellBOTI = 3;
+          document.querySelector(".spell-two").style = "display: none";
+          break;
+        }
+        break;
       case 3: // new life (+30 health, -50 mana)
         if (mana >= 50) {
           updateHealthBar(-30);
@@ -213,7 +222,12 @@ function spellCast(spell) {
 function spellReset() {
   if (mana > 0) {
     // document.querySelector(".spell-one").style = "display: block";
-    // document.querySelector(".spell-two").style = "display: block";
+    // Check if the user is in level 2 to show the spell
+    if (actualLvl >= 1) {
+      document.querySelector(".spell-two").style = "display: block";
+    } else {
+      document.querySelector(".spell-two").style = "display: none";
+    }
     document.querySelector(".spell-three").style = "display: block";
   }
 }
@@ -222,13 +236,14 @@ document.addEventListener("click", (event) => {
   if (event.target.classList.contains("spell-one")) {
     // spellCast(1);
   } else if (event.target.classList.contains("spell-two")) {
-    // spellCast(2);
+    spellCast(2);
   } else if (event.target.classList.contains("spell-three")) {
     spellCast(3);
   }
 });
 
-//** */ Where the fun begins...
+// Where the fun begins...
+
 //* GAME LOGIC
 
 function startGame() {
@@ -254,24 +269,24 @@ function startGame() {
 }
 
 function showQuestion() {
+  spellReset();
   if (currentQuestionIndex >= currentQuestions.length) {
     // Check if the user survived the current level
-    if (health > 0) {
-      // If there are more levels, advance to the next one
-      if (actualLvl < allQuestionLevels.length - 1) {
-        actualLvl++;
-        currentQuestionIndex = 0;
-        currentQuestions = allQuestionLevels[actualLvl];
-        wizardPrompt.textContent = `You survived this level! 🥳 I'll create a portal to the next stage... hold on!`;
-        setTimeout(showQuestion, 10500);
-        return;
-      } else {
-        // All levels are complete
-        endGame();
-        return;
-      }
+    if (health <= 0) {
+      endGame();
+      return;
+    }
+
+    // If there are more levels and the player survived, advance to the next level.
+    if (actualLvl < allQuestionLevels.length - 1) {
+      actualLvl++;
+      currentQuestionIndex = 0;
+      currentQuestions = allQuestionLevels[actualLvl];
+      wizardPrompt.textContent = `You survived this level! I'll create a portal to the next stage... hold on!`;
+      setTimeout(showQuestion, 10500);
+      return;
     } else {
-      // If health is 0 or less, end the game immediately
+      // All levels are complete
       endGame();
       return;
     }
@@ -290,7 +305,6 @@ function showQuestion() {
   // setting category title
   categoryTitleContainer.textContent = `Kategorie: ${currentQuestion.category}`;
   lvlUpdater();
-  spellReset();
   reGen();
 
   // setting questions
@@ -320,7 +334,7 @@ function selectAnswer(e) {
   if (isCorrect) {
     score += pointsPerQuestion;
     feedbackMessageElement.textContent =
-      "Correct! ✨ You won " + pointsPerQuestion + " points!";
+      "Correct! ✨ You won " + pointsPerQuestion + " points.";
     selectedButton.classList.add("correct");
     wizHappy();
   } else {
