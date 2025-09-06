@@ -64,14 +64,15 @@ body {
   /* Required for pseudo-element positioning */
   overflow: hidden;
   /*/
-  /* REFACTORING NEEDED for further responsive design */
-  width: 685px; /* killing handy option right here */
-  height: 425px; /* and here */
+  /* REFACTORING NEEDED for further responsive design */ /* killing handy option right here */
+  /* width: 685px; 
+  height: 425px; */
   /*/
   /* some outter glow for more dimension */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   filter: drop-shadow(0 4px 6px rgba(2, 2, 5, 0.3));
   background-image: url("../static/img/worlds/world-1.png");
+  background-size: cover;
 }
 
 .container::before {
@@ -88,7 +89,7 @@ body {
   z-index: -1;
   background-image: url("../static/img/worlds/world-1.png");
   background-repeat: no-repeat;
-  background-size: fill;
+  background-size: cover;
   animation-name: float;
   animation-duration: 27s;
   animation-iteration-count: infinite;
