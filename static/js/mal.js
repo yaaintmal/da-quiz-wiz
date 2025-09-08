@@ -14,9 +14,9 @@ const intermediateTitle = "Apprentice";
 const expertTitle = "Young Gun Wiz";
 const legendaryTitle = "Coding Ninja";
 
-const lvl1Score = 55;
-const lvl2Score = 99;
-const lvl3Score = 142;
+const lvl1Score = 130;
+const lvl2Score = 213;
+const lvl3Score = 303;
 const lvl4Score = 230;
 
 // penalty multiplier to multiply penalty points (default: 13)
